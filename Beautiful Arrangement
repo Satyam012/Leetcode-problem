@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int ans=0,i,j;
+    void permute(vector<int>&v,int l,int n){
+        if(l==n)ans++;
+        else{
+            for (int i = l; i < n; i++){
+                swap(v[l], v[i]);
+                if(v[l]%(l+1)==0||(l+1)%v[l]==0)permute(v, l+1, n);
+                swap(v[l], v[i]);
+            }
+        }
+    }
+    int countArrangement(int n) {
+        vector<int>v;
+        for(i=1;i<=n;i++)v.push_back(i);
+        ans=0;
+        permute(v,0,n);
+        return ans;
+    }
+};
