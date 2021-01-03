@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maximumUnits(vector<vector<int>>&v, int x) {
+        sort(v.begin(),v.end(),[](vector<int>v1,vector<int>v2){
+            return v1[1]>v2[1];
+        });
+        int ans=0;
+        for(auto z:v){
+            if(x==0)break;
+            if(z[0]<=x){
+                ans+=(z[1]*z[0]);
+                x-=z[0];
+            }
+            else{
+                ans+=(x*z[1]);
+                break;
+            }
+        }
+        return ans;
+    }
+};
