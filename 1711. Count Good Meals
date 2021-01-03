@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countPairs(vector<int>& v) {
+        long long int x,mod=1e9+7,ans=0;
+        map<long long int,long long int>mp;
+        sort(v.begin(),v.end());
+        for(auto z:v){
+            long long int xx=0;
+            for(int i=0;i<22;i++){
+                x=pow(2,i);
+                if(x>2*z)break;
+                x=x-z;
+                if(x>=0){
+                    ans+=mp[x];
+                    ans%=mod;
+                }
+            }
+            mp[z]++;
+        }
+        return ans;
+    }
+};
