@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        vector<bool>v(1000001,false);
+        for(auto x:arr)v[x]=true;
+        for(int i=1;i<=1000000;i++){
+            if(v[i])continue;
+            k--;
+            if(k==0)return i;
+        }
+        return 0;
+    }
+};
