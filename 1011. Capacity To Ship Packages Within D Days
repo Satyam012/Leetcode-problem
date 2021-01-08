@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int shipWithinDays(vector<int>& v, int D) {
+        int i,j,l=0,h=1e6;
+        for(auto x:v)l=max(l,x);
+        
+        while(l<=h){
+            int mid=(l+h)/2;
+            int s=0,cnt=1;
+            for(i=0;i<v.size();i++){
+                if(s+v[i]<=mid)s+=v[i];
+                else{
+                    s=v[i];
+                    cnt++;
+                }
+            }
+            if(cnt<=D)h=mid-1;
+            else l=mid+1;
+        }
+        return l;
+    }
+};
