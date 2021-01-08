@@ -1,0 +1,13 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& v, char k) {
+        int i,j,l=0,h=v.size()-1;
+        if(v[h]<=k)return v[0];
+        while(l<=h){
+            int mid=(l+h)/2;
+            if(v[mid]<=k)l=mid+1;
+            else h=mid-1;
+        }
+        return v[l];
+    }
+};
