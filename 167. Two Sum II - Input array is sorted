@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& v, int k) {
+        int n=v.size(),mid;
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            int x=v[i];
+            if(x>k||(x==k/2 && k%2==0)){
+                cnt++;
+                if(cnt==2)return {i,i+1};
+                continue;
+            }    
+            int l=0,h=n-1;
+            while(l<=h){
+                mid=(l+h)/2;
+                if(v[mid]+x==k){
+                    return {i+1,mid+1};
+                }
+                if(v[mid]+x<k)l=mid+1;
+                else h=mid-1;
+            }
+        }
+        return {};
+    }
+};
