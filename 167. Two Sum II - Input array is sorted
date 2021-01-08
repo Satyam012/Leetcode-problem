@@ -1,3 +1,5 @@
+Time-O(nlogn)
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& v, int k) {
@@ -19,6 +21,23 @@ public:
                 if(v[mid]+x<k)l=mid+1;
                 else h=mid-1;
             }
+        }
+        return {};
+    }
+};
+
+time O(logn)
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& v, int k) {
+        int l=0,h=v.size()-1;
+        while(l<=h){
+            if(v[l]+v[h]==k){
+                return {l+1,h+1};
+            }
+            if(v[l]+v[h]<k)l++;
+            else h--;
         }
         return {};
     }
