@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int totalMoney(int n) {
+        int x,y,z,s;
+        x=n/7;
+        z=28;
+        for(int i=1;i<x;i++)z+=(i*7);
+        s=28*(x-1)+z;
+        y=n%7;
+        x++;
+        while(y--){
+            s+=x;
+            x++;
+        }
+        return s;
+    }
+};
