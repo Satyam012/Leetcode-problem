@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int>st;
+        int cnt=0;
+        for(int i=0;i<s.length();i++){
+            char c=s[i];
+            if(c==')'||c=='('){
+                if(st.empty()||c=='(')st.push(i);
+                else{
+                    if(s[st.top()]=='(')st.pop();
+                    else st.push(i);
+                }
+            }
+        }
+        while(!st.empty()){
+            cout<<st.top()<<" ";
+            s.erase(st.top(),1);
+            st.pop();
+        }
+        return s;
+    }
+};
