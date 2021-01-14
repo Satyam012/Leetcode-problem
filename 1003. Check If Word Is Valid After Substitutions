@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char>st;
+        for(int i=0;i<s.length();i++){
+            if(st.size()<2||s[i]!='c'||st.top()!='b'){
+                st.push(s[i]);
+            }    
+            else{
+                char c=st.top();
+                st.pop();
+                char d=st.top();
+                st.pop();
+                if(d!='a'||c!='b')return false;
+            }
+        }
+        return st.empty();
+    }
+};
