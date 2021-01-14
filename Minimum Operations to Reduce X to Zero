@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int x) {
+        int len=-1,s=0,i=0,j=0,n=nums.size();
+        for(auto z:nums)s+=z;
+        x=s-x;
+        s=0;
+        while(i<n&&j<n){
+            if(s<x)s+=nums[j++];
+            else if(s==x){
+                len=max(len,j-i);
+                s-=nums[i++];
+                s+=nums[j++];
+            }
+            else{
+                s-=nums[i++];
+            }
+        }
+        if(s==x)len=max(len,j-i);
+        if(len==-1)return len;
+        return n-len;
+    }
+};
