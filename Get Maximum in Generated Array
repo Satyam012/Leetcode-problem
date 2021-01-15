@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int getMaximumGenerated(int n) {
+        if(n<2)return n;
+        int v[n+1],maxx[n+1];
+        v[0]=0,v[1]=1,maxx[0]=0,maxx[1]=1;
+        for(int i=2;i<=n;i++){
+            if(i%2)v[i]=v[i/2]+v[i/2+1];
+            else v[i]=v[i/2];
+            maxx[i]=max(maxx[i-1],v[i]);
+        }
+        return maxx[n];
+    }
+};
