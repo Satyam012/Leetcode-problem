@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+        vector<int>id(n),v;
+        for(auto x:edges){
+            id[x[1]]++;
+        }
+        for(int i=0;i<id.size();i++){
+            if(id[i]==0)v.push_back(i);
+        }    
+        return v;
+    }
+};
