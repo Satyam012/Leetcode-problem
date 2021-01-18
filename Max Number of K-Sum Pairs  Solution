@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        map<int,int>mp;
+        for(auto x:nums)mp[x]++;
+        int cnt=0;
+        for(auto x:nums){
+            if(k==x*2)cnt+=mp[x]/2;
+            else cnt+=min(mp[k-x],mp[x]);
+            mp.erase(x);
+            mp.erase(k-x);
+        }
+        return cnt;
+    }
+};
