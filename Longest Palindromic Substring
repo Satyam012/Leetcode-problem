@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int i=0,j,k,n=s.length(),x=0,y=0,mx=0;
+        if(n<2)return s;
+        string str="";
+        while(i<n){
+            k=i;
+            while(i+1<n&&s[i]==s[i+1])i++;
+            j=i++;
+            while(k-1>=0&&j+1<n&&s[k-1]==s[j+1]){
+                k--;
+                j++;
+            }
+            if(y-x<j-k){
+                x=k,y=j;
+            }
+        }
+        return s.substr(x,y-x+1);
+    }
+};
