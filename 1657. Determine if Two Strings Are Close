@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        if(word1.length()!=word2.length())return false;
+        int a[26]={0},b[26]={0};
+        vector<pair<int,char>>v1,v2;
+        
+        for(auto x:word1)a[x-'a']++;
+        for(auto x:word2){
+            if(a[x-'a']==0)return false;
+            b[x-'a']++;
+        }
+        for(int i=0;i<26;i++){
+            if(a[i]){
+                v1.push_back({a[i],'a'+i});
+            }
+            if(b[i]){
+                v2.push_back({b[i],'a'+i});
+            }
+        }
+        if(v1.size()!=v2.size())return false;
+        
+        sort(v1.begin(),v1.end());
+        sort(v2.begin(),v2.end());
+        for(int i=0;i<v1.size();i++){
+            if(v1[i].first!=v2[i].first)return false;
+        }
+        return true;
+    }
+};
