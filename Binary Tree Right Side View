@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int>v;
+    int h=0;
+    void test(TreeNode*root,int l){
+        if(!root)return;
+        if(l>v.size())v.push_back(root->val);
+        test(root->right,l+1);
+        test(root->left,l+1);
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        v.clear();
+        test(root,1);
+        return v;
+    }
+};
