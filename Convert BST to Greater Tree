@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int s=0;
+    TreeNode* test(TreeNode*root){
+        if(!root)return root;
+        test(root->right);
+        s+=root->val;
+        root->val=s;
+        test(root->left);
+        return root;
+    }
+    TreeNode* convertBST(TreeNode* root) {
+        s=0;
+        return test(root);
+    }
+};
