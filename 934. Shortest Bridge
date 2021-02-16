@@ -1,0 +1,38 @@
+class Solution {
+public:
+    
+    void test(vector<vector<int>>& A,int i,int j,int m,int n,queue<pair<int,int>>&q){
+        if(i<0||j<0||i>=m||j>=n||A[i][j]==0||A[i][j]==2)return;
+        q.push({i,j});
+        A[i][j]=2;
+        test(A,i-1,j,m,n,q);
+        test(A,i,j-1,m,n,q);
+        test(A,i+1,j,m,n,q);
+        test(A,i,j+1,m,n,q);
+    }
+    int shortestBridge(vector<vector<int>>& A) {
+        queue<pair<int,int>>q;
+        int i,j,m=A.size(),n=A[0].size(),step=-1;
+        vector<vector<bool>>vis(m,vector<bool>(n,false));
+        for(i=0;i<m;i++)for(j=0;j<n;j++)if(A[i][j]==1)goto abc;
+        abc:
+        test(A,i,j,m,n,q);
+        while(!q.empty()){
+            int x=q.size();
+            while(x--){
+                pair<int,int>p=q.front();
+                q.pop();
+                i=p.first,j=p.second;
+                if(i<0||j<0||i>=m||j>=n||vis[i][j])continue;
+                vis[i][j]=true;
+                if(A[i][j]==1)return step;
+                q.push({i-1,j});
+                q.push({i,j-1});
+                q.push({i+1,j});
+                q.push({i,j+1});
+            }
+            step++;
+        }
+        return step;
+    }
+};
