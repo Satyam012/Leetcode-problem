@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<string>v;
+    void test(string s,int i,int n,string str)
+    {
+        if(i==n)v.push_back(s);
+        else{
+            if(str[i]>='0'&&str[i]<='9')
+            {
+                test(s+str[i],i+1,n,str);
+            }
+            else{
+                char c1,c2;
+                c1=tolower(str[i]);
+                c2=toupper(str[i]);
+                test(s+c1,i+1,n,str);
+                test(s+c2,i+1,n,str);
+            }
+        }
+    }
+    vector<string> letterCasePermutation(string S) {
+        string str="";
+        
+            test(str,0,S.length(),S);
+        
+        return v;
+    }
+};
