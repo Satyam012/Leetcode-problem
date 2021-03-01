@@ -1,0 +1,7 @@
+class Solution {
+public:
+    int distributeCandies(vector<int>& v) {
+        set<int>st(v.begin(),v.end());
+        return min(st.size(),v.size()/2);
+    }
+};
