@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int nearestValidPoint(int x, int y, vector<vector<int>>& z) {
+        int ans=1e5,dis=INT_MAX;
+        for(int i=0;i<z.size();i++){
+            if(z[i][0]==x&&abs(z[i][1]-y)<dis){
+                dis=abs(z[i][1]-y);
+                ans=i;
+            }
+            else if(z[i][1]==y&&abs(z[i][0]-x)<dis){
+                dis=abs(z[i][0]-x);
+                ans=i;
+            }
+        }
+        return ans==1e5?-1:ans;
+    }
+};
