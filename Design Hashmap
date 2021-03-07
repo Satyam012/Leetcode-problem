@@ -1,0 +1,42 @@
+class MyHashMap {
+public:
+    vector <pair<int,int>> hmap[10005];
+    int mod;
+    MyHashMap() {
+        mod = 1e3;
+        int i;
+        for (i = 0; i < mod; i++) {
+            hmap[i].clear();
+        }
+    }
+    
+    void put(int key, int value) {
+        int hash = key % mod;
+        for (int i = 0; i < hmap[hash].size(); i++) {
+            if (hmap[hash][i].first == key) {
+                hmap[hash][i].second = value;
+                return;
+            }
+        }
+        hmap[hash].push_back(make_pair(key, value));
+    }
+    
+    int get(int key) {
+        int hash = key % mod;
+        for (auto p : hmap[hash]) {
+            if (p.first == key) return p.second;
+        }
+        return -1;
+    }
+    
+    void remove(int key) {
+        vector <pair<int, int>> v;
+        int hash = key % mod;
+        for (auto it = hmap[hash].begin(); it != hmap[hash].end(); it++) {
+            if ((*it).first == key) {
+                hmap[hash].erase(it);
+                return;
+            }
+        }
+    }
+};
