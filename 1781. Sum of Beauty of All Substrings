@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int beautySum(string s) {
+        int ans=0;
+        for(int i=0;i<s.length();i++){
+            int mn=INT_MAX,mx=INT_MIN;
+            int mp[26]={};
+            
+            for(int j=i;j<s.length();j++){
+                int cnt=++mp[s[j]-'a'];
+                mx=max(mx,cnt);
+                mn=cnt;
+                for(int id=0;id<26;id++){
+                    if(mp[id])mn=min(mn,mp[id]);
+                }
+                ans+=mx-mn;
+            }
+        }
+        return ans;
+    }
+};
