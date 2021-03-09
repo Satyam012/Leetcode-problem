@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* test(TreeNode* root,int v,int d){
+        if(!root)return root;
+        if(d==1){
+            TreeNode*head1=new TreeNode(v),*tmp1,*head2=new TreeNode(v),*tmp2;
+            
+            tmp1=root->left;
+            root->left=head1;
+            head1->left=tmp1;
+            
+            tmp2=root->right;
+            root->right=head2;
+            head2->right=tmp2;
+            return root;
+        }
+        root->left=test(root->left,v,d-1);
+        root->right=test(root->right,v,d-1);
+        return root;
+    }
+    TreeNode* addOneRow(TreeNode* root, int v, int d) {
+        if(d==1){
+            TreeNode*head=new TreeNode(v);
+            head->left=root;
+            return head;
+        }
+        return test(root,v,d-1);
+    }
+};
