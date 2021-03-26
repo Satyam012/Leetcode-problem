@@ -1,0 +1,14 @@
+static vector<long>v(9);
+class Solution {
+public:
+    int countNumbersWithUniqueDigits(int n) {
+        v[0]=1;
+        if(v[n]!=0)return v[n];
+        v[n]=(PnR(10,n)-PnR(9,n-1))+countNumbersWithUniqueDigits(n-1);
+        return v[n];
+    }
+    int PnR(int n,int r){
+        if(r==0)return 1;
+        return n*PnR(n-1,r-1);
+    }
+};
