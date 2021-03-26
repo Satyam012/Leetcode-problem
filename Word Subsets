@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<string> wordSubsets(vector<string>& A, vector<string>& B) {
+        vector<string>ans;
+        vector<int>maxx(26,0);
+        for(auto str:B){
+            vector<int>cur(26,0);
+            for(auto c:str)cur[c-'a']++;
+            for(int i=0;i<26;i++)maxx[i]=max(maxx[i],cur[i]);
+        }
+        
+        for(auto str:A){
+            vector<int>cur(26,0);
+            for(auto c:str)cur[c-'a']++;
+            bool flag=true;
+            for(int i=0;i<26;i++){
+                if(cur[i]<maxx[i]){
+                    flag=false;
+                    break;
+                }    
+            }
+            if(flag)ans.push_back(str);
+        }
+        return ans;
+    }
+};
