@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int numDifferentIntegers(string word) {
+        int j=0,i=0;
+        set<string>s;
+        string x="";
+        while(i<word.length()){
+            if(word[i]>='0'&&word[i]<='9'){
+                x+=word[i];
+            }
+            else {
+                if(x.length()>0){
+                    int k=0;
+                    while(k<x.length()&&x[k]=='0')k++;
+                    if(x.length()==k)s.insert("0");
+                    else{
+                        string str;
+                        while(k<x.length()){
+                            str+=x[k++];
+                        }
+                        s.insert(str);
+                        cout<<str<<" ";
+                    }
+                    x="";
+                }    
+            };
+            i++;
+        }
+        if(x.length()>0){
+                    int k=0;
+                    while(k<x.length()&&x[k]=='0')k++;
+                    if(x.length()==k)s.insert("0");
+                    else{
+                        string str;
+                        while(k<x.length()){
+                            str+=x[k++];
+                        }
+                        s.insert(str);
+                        cout<<str<<" ";
+                    }
+                    x="";
+                }    
+        return s.size();
+    }
+};
