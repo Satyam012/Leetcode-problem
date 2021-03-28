@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int solve(int i,vector<int>&s,vector<int>&dp){
+        if(i>=s.size())return 0;
+        if(dp[i]==INT_MIN){
+            for(int k=0,sum=0;k<3 && k+i<s.size();k++){
+                sum+=s[k+i];
+                dp[i]=max(dp[i],sum-solve(i+k+1,s,dp));
+            } 
+        }
+        return dp[i];
+    }
+    string stoneGameIII(vector<int>& s) {
+        vector<int>dp(s.size()+1,INT_MIN);
+        int x=solve(0,s,dp);
+        return x==0?"Tie":x<0?"Bob":"Alice";
+    }  
+};
