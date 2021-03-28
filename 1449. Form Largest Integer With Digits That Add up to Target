@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string largestNumber(vector<int>& cost, int k) {
+        vector<int>dp(k+1,-10000);
+        dp[0]=0;
+        for(int i=1;i<=k;i++){
+            for(int j=0;j<cost.size();j++){
+                if(cost[j]<=i)dp[i]=max(dp[i],1+dp[i-cost[j]]);
+            }
+        }
+        if(dp[k]<0)return "0";
+        string ans;
+        
+        for(int j=8;j>=0;j--){
+            while(k>=cost[j] && dp[k]==dp[k-cost[j]]+1){
+                ans+=('1'+j);
+                k-=cost[j];
+            }
+        }
+        return ans;
+    }
+};
