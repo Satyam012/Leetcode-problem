@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int mod=1e9+7;
+    int numberOfArrays(string s, int k) {
+        vector<int>dp(s.length(),-1);
+        return dfs(dp,s,k,0,s.length());
+    }
+    int dfs(vector<int>&dp,string &s,int k,int i,int n){
+        if(i==n)return 1;
+        if(s[i]=='0')return 0;
+        if(dp[i]!=-1)return dp[i];
+        long num=0,ans=0;
+        for(int j=i;j<n;j++){
+            num=10*num+(s[j]-'0');
+            if(num>k)break;
+            ans+=dfs(dp,s,k,j+1,n);
+            ans%=mod;
+        }
+        dp[i]=ans;
+        return dp[i];
+    }
+};
