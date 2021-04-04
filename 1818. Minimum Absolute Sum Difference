@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minAbsoluteSumDiff(vector<int>& nums1, vector<int>& nums2) {
+        long long mx=0,j=0,k=0,mod=1e9+7;
+        for(int i=0;i<nums1.size();i++){
+            if(abs(nums1[i]-nums2[i])>mx){
+                mx=abs(nums1[i]-nums2[i]);
+                j=i;
+            }
+        }
+        for(int i=0;i<nums1.size();i++){
+            if(abs(nums1[i]-nums2[j])<mx){
+                mx=abs(nums1[i]-nums2[j]);
+            }
+        }
+        long long ans=0;
+        for(int i=0;i<nums1.size();i++){
+            if(i!=j){
+                ans+=abs(nums1[i]-nums2[i]);
+            }
+            else ans+=mx;
+            ans%=mod;
+        }
+        return ans;
+    }
+};
