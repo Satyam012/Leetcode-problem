@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string truncateSentence(string s, int k) {
+        string ans;
+        vector<string>v;
+        string str;
+        for(auto x:s){
+            if(x==' '){
+                v.push_back(str);
+                str="";
+            }
+            else{
+                str+=x;
+            }
+        }
+        v.push_back(str);
+        for(int i=0;i<k;i++){
+            if(i==k-1)ans+=v[i];
+            else ans+=v[i]+" ";
+        }
+        return ans;
+    }
+};
