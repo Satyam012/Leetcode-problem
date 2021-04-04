@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool areSentencesSimilar(string s1, string s2) {
+        if(s1.length()==0||s2.length()==0)return true;
+        vector<string>v1,v2;
+        string str;
+        for(auto x:s1){
+            if(x==' '){
+                v1.push_back(str);
+                str="";
+            }
+            else str+=x;
+        }
+        v1.push_back(str);
+        str="";
+        for(auto x:s2){
+            if(x==' '){
+                v2.push_back(str);
+                str="";
+            }
+            else str+=x;
+        }
+        v2.push_back(str);
+        if(v1.size()<v2.size())swap(v1,v2);
+        int i=0,j=v2.size(),l=0;
+        while(i<j){
+            if(v1[l]==v2[i]){
+                l++;
+                i++;
+            }
+            else{
+                while(l<v1.size()&&v1[l]!=v2[i])l++;
+                if(l==v1.size())return false;
+                while(l<v1.size()&&i<j){
+                    if(v1[l]!=v2[i])return false;
+                    l++;
+                    i++;
+                }
+                if(l!=v1.size()||i!=j)return false;
+            }
+        }
+        return true;
+    }
+};
