@@ -1,0 +1,21 @@
+time O(n) space O(1)->
+
+class Solution {
+public:
+    int minOperations(int n) {
+        int s=0;
+        for(int i=1;i<=n/2;i++)s+=(n-2*i+1);
+        return s;
+    }
+};
+
+
+
+time O(1) space O(1)->
+
+class Solution {
+public:
+    int minOperations(int n) {
+        return n%2?(n/2)*(n/2+1):n*n/4;
+    }
+};
