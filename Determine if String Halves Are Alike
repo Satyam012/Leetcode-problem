@@ -1,0 +1,10 @@
+class Solution {
+public:
+    bool halvesAreAlike(string s) {
+        int cnt=0,i=0;
+        set<char>st{'a','e','o','u','i','A','E','O','U','I'};
+        for(;i<s.length()/2;i++)if(st.find(s[i])!=st.end())cnt++;
+        for(;i<s.length();i++)if(st.find(s[i])!=st.end())cnt--;
+        return cnt==0;
+    }
+};
