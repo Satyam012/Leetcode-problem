@@ -1,0 +1,14 @@
+#define ll long long int
+#define mod 1000000007 
+class Solution {
+public:
+    int arraySign(vector<int>& nums) {
+        ll s=0;
+        for(auto x:nums){
+            if(x==0)return 0;
+            if(x<0)s++;
+        }
+        if(s%2==0)return 1;
+        return -1;
+    }
+};
