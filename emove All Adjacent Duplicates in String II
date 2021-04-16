@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        vector<char>v;
+        int i;
+        for(auto c:s){
+            v.push_back(c);
+            if(v.size()>=k){
+                for(i=0;i<k-1;i++)if(v[v.size()-1-i]!=v[v.size()-i-2])break;
+                if(i==k-1){
+                    for(i=0;i<k;i++)v.pop_back();
+                }
+            }
+        }
+        string str;
+        for(auto c:v)str+=c;
+        return str;
+    }
+};
