@@ -1,0 +1,9 @@
+    int missingNumber(vector<int>& A) {
+        int first = A[0], last = A[0], sum = 0, n = A.size();
+        for (int a : A) {
+            first = min(first, a);
+            last = max(last, a);
+            sum += a;
+        }
+        return (first + last) * (n + 1) / 2 - sum;
+    }
