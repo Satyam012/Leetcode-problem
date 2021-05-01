@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int start=0,end=0,len=INT_MAX,cnt=0;
+        string ans;
+        map<char,int>win,mp;
+        for(auto c:t)mp[c]++;
+        for(auto c:s){
+            win[c]++;
+            if(win[c]<=mp[c]){
+                cnt++;
+            }
+            if(cnt>=t.length()){
+                while(win[s[start]]>mp[s[start]]){
+                    win[s[start]]--;
+                    start++;
+                }
+                if(len>end-start+1){
+                    len=end-start+1;
+                    ans=s.substr(start,len);
+                }
+            }
+            end++;
+        }
+        return ans;
+    }
+};
