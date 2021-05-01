@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> v[2001];
+    bool vis[2001];
+
+    void dfs(int src){
+            vis[src]=true;
+            int i;
+            for(i=0; i<v[src].size();i++){
+                if(vis[v[src][i]] == false){
+                    dfs(v[src][i]);
+                }
+            }
+    }
+    int countComponents(int n, vector<vector<int>>& edges) {
+        for(auto x:edges){
+            v[x[0]].push_back(x[1]);
+            v[x[1]].push_back(x[0]);
+        }
+        
+        memset(vis,false,sizeof(vis));
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            if(vis[i]==false){
+                dfs(i);
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
