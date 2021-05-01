@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& tree) {
+        map<int,int>mp;
+        int i=0,j=0,ans=0;
+        while(j<tree.size()){
+            mp[tree[j++]]++;
+            while(mp.size()>2){
+                mp[tree[i]]--;
+                if(mp[tree[i]]==0)mp.erase(tree[i]);
+                i++;
+            }
+            ans=max(ans,j-i);
+        }
+        return ans;
+    }
+};
