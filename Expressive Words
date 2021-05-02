@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int expressiveWords(string S, vector<string>& words) {
+        int ans=0;
+        for(auto word:words)if(f(word,S))ans++;
+        return ans;
+    }
+    bool f(string word,string s){
+        int i=0,m=word.length(),n=s.length();
+        for(int j=0;j<n;j++){
+            if(i<m && word[i]==s[j])i++;
+            else if(j>1 && s[j-1]==s[j]&&s[j]==s[j-2]);
+            else if(j>0 && j<n-1 && s[j]==s[j+1]&&s[j]==s[j-1]);
+            else return false;
+        }
+        if(i==m)return true;
+        return false;
+    }
+};
