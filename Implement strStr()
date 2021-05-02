@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void KMP(vector<int>&pre,string ptr,int n){
+        int i=1,len=0;
+        pre[0]=0;
+        while(i<n){
+            if(ptr[i]==ptr[len])pre[i++]=++len;
+            else if(len!=0)len=pre[len-1];
+            else pre[i++]=0;
+        }
+    }
+    
+    int strStr(string str, string ptr) {
+        int m=str.length(),n=ptr.length(),i=0,j=0;
+        if(n==0)return 0;
+        if(m==0)return -1;
+        vector<int>pre(n);
+        KMP(pre,ptr,n);
+        while(i<m){
+            if(str[i]==ptr[j]){i++; j++;}
+            if(j==n)return i-j;
+            else if(i<m&&str[i]!=ptr[j]){
+                if(j!=0)j=pre[j-1];
+                else i++;
+            }
+        }
+        return -1;
+    }
+};
