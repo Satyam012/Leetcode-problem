@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string lower(string s){
+        string str;
+        for(auto c:s){
+            if(c>='A'&&c<='Z')c='a'+(c-'A');
+            str+=c;
+        }
+        return str;
+    }
+    string mostCommonWord(string p, vector<string>& banned) {
+        string str,res;
+        map<string,int>mp;
+        for(auto c:p){
+            if((c>='a'&&c<='z')||(c>='A'&&c<='Z')){
+                str+=c;
+            }    
+            else{
+                mp[lower(str)]++;
+                str="";
+            }
+        }
+        mp[lower(str)]++;
+        mp.erase("");
+        for(auto x:banned)mp.erase(lower(x));
+        int ans=0;
+        for(auto x:mp){
+            if(x.second>ans){
+                ans=x.second;
+                res=x.first;
+            }
+            else if(x.second==ans){
+                res=min(res,x.first);
+            }
+        }
+        return res;
+    }
+};
