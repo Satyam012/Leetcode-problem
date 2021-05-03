@@ -1,0 +1,38 @@
+class TicTacToe {
+public:
+    /** Initialize your data structure here. */
+    int dp[100][100],n;
+    TicTacToe(int n) {
+        this->n=n;
+        memset(dp,0,sizeof dp);
+    }
+    
+    /** Player {player} makes a move at ({row}, {col}).
+        @param row The row of the board.
+        @param col The column of the board.
+        @param player The player, can be either 1 or 2.
+        @return The current winning condition, can be either:
+                0: No one wins.
+                1: Player 1 wins.
+                2: Player 2 wins. */
+    int cnt=0,i;
+    int move(int row, int col, int p) {
+        dp[row][col]=p;
+        cnt++;   
+        for(i=0;i<n;i++)if(dp[row][i]!=p)break;
+        if(i==n)return p;
+        for(i=0;i<n;i++)if(dp[i][col]!=p)break;
+        if(i==n)return p;
+        for(i=0;i<n;i++)if(dp[i][i]!=p)break;
+        if(i==n)return p;
+        for(i=0;i<n;i++)if(dp[i][n-i-1]!=p)break;
+        if(i==n)return p;
+        return 0;
+    }
+};
+
+/**
+ * Your TicTacToe object will be instantiated and called as such:
+ * TicTacToe* obj = new TicTacToe(n);
+ * int param_1 = obj->move(row,col,player);
+ */
