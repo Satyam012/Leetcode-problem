@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int jump=0,step=1,dis=0,n=nums.size();
+	    for(int i=0;i<n-1;i++){
+            dis=max(dis,nums[i]+i);
+            step--;
+            if(step==0){
+                jump++;
+                if(dis<=i)break;
+                step=dis-i;
+            }
+	    }
+        return jump;
+    }
+};
