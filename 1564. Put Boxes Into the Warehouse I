@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int maxBoxesInWarehouse(vector<int>& boxes, vector<int>& wh, int cnt = 0) {
+    sort(begin(boxes), end(boxes));
+    for (int i = 1; i < wh.size(); ++i)
+        wh[i] = min(wh[i], wh[i - 1]);
+    for (int i = wh.size() - 1; i >= 0; --i)
+        cnt += cnt < boxes.size() && boxes[cnt] <= wh[i];
+    return cnt;
+}
+};
