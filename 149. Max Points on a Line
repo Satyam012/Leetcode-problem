@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>& points) {
+        unordered_map<double, int> slope;
+        int i = 0, max_p = 0, same_p = 1, same_v = 1;
+        
+        for (i = 0; i < points.size(); same_p = 1, same_v = 1, i++) {
+            for (int j = i+1; j < points.size(); j++) {
+                if (points[i][1] == points[j][1]) 
+                    { if (++same_v && points[i][0] == points[j][0] && ++same_p); }
+                else 
+                    slope[double(points[i][0] - points[j][0]) / double(points[i][1] - points[j][1])]++;
+            }
+            max_p = max(max_p, same_v);
+            for (auto item : slope) 
+                { max_p = max(max_p, item.second + same_p); }
+            slope.clear();
+        }
+        return max_p;
+    }
+};
