@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
+        int a[256],i=0,j=0,n=s.length(),cnt=0,ans=0;
+        memset(a,0,sizeof a);
+        while(i<n){
+            if(a[s[i]]==0)cnt++;
+            a[s[i]]++;
+            while(cnt>k && a[s[j]]>0){
+                a[s[j]]--;
+                if(a[s[j]]==0)cnt--;
+                j++;
+            }  
+            ans=max(ans,i-j+1);
+            i++;
+        }
+        return ans;
+    }
+};
