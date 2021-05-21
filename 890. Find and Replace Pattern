@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pat) {  
+        vector<string>v;
+        for(auto w:words){
+            int s[256],p[256];
+            for(int i=0;i<256;i++)s[i]=p[i]=0;
+            bool same=true;
+            for (int i=0; i<w.length(); i++){
+                if (s[w[i]]!=p[pat[i]]){
+                    same=false;
+                    break;
+                }else{
+                    s[w[i]]=p[pat[i]]=i+1;
+                }
+            }
+            if (same) v.push_back(w);
+        }
+        return v;
+    }
+};
