@@ -1,0 +1,33 @@
+class Solution {
+public:
+    queue<int>q;
+    bool flag=false;
+    void f(TreeNode*root,double t,int k){
+        if(!root)return;
+        if(flag)return;
+        f(root->left,t,k);
+        
+        if(q.size()==k){
+            if(abs(1.0*q.front()-t)>abs(t-1.0*root->val)){
+                q.pop();
+                q.push(root->val);
+            }
+            else {
+                flag=true;
+                return;
+            }
+        }
+        else q.push(root->val);
+        
+        f(root->right,t,k);
+    }
+    vector<int> closestKValues(TreeNode* root, double target, int k) {
+        f(root,target,k);
+        vector<int>v;
+        while(!q.empty()){
+            v.push_back(q.front());
+            q.pop();
+        }
+        return v;
+    }
+};
