@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int dp[100][100];
+    int f(vector<vector<int>>& v,int i,int j,int m,int n){
+        if(i==m||j==n)return 0;
+        if(dp[i][j]!=0)return dp[i][j];
+        int mn=INT_MAX;
+        for(int l=0;l<n;l++){
+            if(l!=j){
+                mn=min(mn,f(v,i+1,l,m,n)+v[i][l]);
+            }
+        }
+        dp[i][j]=mn;
+        return mn;
+    }
+    int minCostII(vector<vector<int>>& costs) {
+        memset(dp,0,sizeof dp);
+        int m=costs.size(),n=costs[0].size();
+        
+        int mn=INT_MAX;
+        for(int l=0;l<n;l++){
+            dp[0][l]=f(costs,1,l,m,n)+costs[0][l];
+            mn=min(mn,dp[0][l]);
+        }
+        
+        return mn;
+    }
+};
