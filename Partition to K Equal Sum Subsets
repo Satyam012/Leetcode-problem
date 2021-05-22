@@ -1,0 +1,26 @@
+class Solution {
+public:
+	bool dfs(vector<int>& nums,vector<int>visited,int idx,int k,int currsum,int targetsum)
+    {
+        if(k==0) return true;                                             
+        if(currsum==targetsum) return dfs(nums,visited,0,k-1,0,targetsum);  
+        for(int i=idx ; i<nums.size() ; i++)
+        {
+            if(!visited[i])                             
+            {
+                visited[i]=true;    
+                if(dfs(nums,visited,i+1,k,currsum+nums[i],targetsum)) return true;        
+                visited[i]=false;                                                         
+            }
+        }
+        return false;
+    }
+    bool canPartitionKSubsets(vector<int>& nums, int k) {
+        vector<int>visited(nums.size(),false);
+        int sum=0;
+        for(auto x:nums) sum+=x;
+        if(sum%k!=0) return false;
+        int targetsum=sum/k;
+        return dfs(nums,visited,0,k,0,targetsum);
+    }
+};
