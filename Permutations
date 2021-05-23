@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<vector<int>>vec;
+    void f(vector<int>nums,int i,int n){
+        if(i==n)vec.push_back(nums);
+        else{
+            for(int l=i;l<n;l++){
+                swap(nums[i],nums[l]);
+                f(nums,i+1,n);
+                swap(nums[i],nums[l]);
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        f(nums,0,nums.size());
+        return vec;
+    }
+};
