@@ -1,0 +1,25 @@
+class MovingAverage {
+public:
+    /** Initialize your data structure here. */
+    int cnt=0,size,s=0;
+    queue<int>q;
+    MovingAverage(int size) {
+        this->size=size;
+    }
+    
+    double next(int val) {
+        if(q.size()==size){
+            s-=q.front();
+            q.pop();
+        }
+        q.push(val);
+        s+=val;
+        return (double)s/q.size();
+    }
+};
+
+/**
+ * Your MovingAverage object will be instantiated and called as such:
+ * MovingAverage* obj = new MovingAverage(size);
+ * double param_1 = obj->next(val);
+ */
