@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string fractionToDecimal(int numerator, int denominator) {
+        if(numerator==0)return "0";
+        string ans;
+        if(numerator<0 ^ denominator<0)ans="-";
+        long int n=abs(numerator),d=abs(denominator),r=n%d;
+        ans+=to_string(n/d);
+        if(!r)return ans;
+        ans+='.';
+        unordered_map<int,int>mp;
+        while(r){
+            if(mp.find(r)!=mp.end()){
+                ans.insert(mp[r],"(");
+                ans+=')';
+                return ans;
+            }
+            mp[r]=ans.size();
+            r*=10;
+            ans+=to_string(r/d);
+            r%=d;
+        }
+        return ans;
+    }
+};
