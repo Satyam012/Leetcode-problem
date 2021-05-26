@@ -1,0 +1,46 @@
+class RandomizedCollection {
+public:
+    /** Initialize your data structure here. */
+    multiset<int>st;
+    RandomizedCollection() {
+        
+    }
+    
+    /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+    bool insert(int val) {
+        if(st.find(val)!=st.end()){
+            st.insert(val);
+            return false;
+        }    
+        st.insert(val);
+        return true;
+    }
+    
+    /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+    bool remove(int val) {
+        auto itr = st.find(val);
+        if(itr!=st.end()){
+            st.erase(itr);
+            return true;
+        }
+        return false;
+    }
+    
+    /** Get a random element from the collection. */
+    int getRandom() {
+        cout<<st.size();
+        int id=rand()%st.size();
+        
+        multiset<int>::iterator itr=st.begin();
+        while(id--)itr++;
+        return *itr;
+    }
+};
+
+/**
+ * Your RandomizedCollection object will be instantiated and called as such:
+ * RandomizedCollection* obj = new RandomizedCollection();
+ * bool param_1 = obj->insert(val);
+ * bool param_2 = obj->remove(val);
+ * int param_3 = obj->getRandom();
+ */
