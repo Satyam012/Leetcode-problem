@@ -1,0 +1,25 @@
+#define pq priority_queue<int, vector<int>, greater<int> >
+class Solution {
+public:
+    vector<vector<int>> highFive(vector<vector<int>>& items) {
+        map<int,pq>mp;
+        for(auto x:items){
+            mp[x[0]].push(x[1]);
+            if(mp[x[0]].size()>5){
+                mp[x[0]].pop();
+            }
+            
+        }
+        vector<vector<int>>v;
+        for(auto x:mp){
+            int ttl=0;
+            pq q=x.second;
+            while(q.size()!=0){
+                ttl+=q.top();
+                q.pop();
+            }
+            v.push_back({x.first,ttl/5});
+        }
+        return v;
+    }
+};
