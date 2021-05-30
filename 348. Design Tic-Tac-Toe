@@ -1,0 +1,51 @@
+class TicTacToe {
+public:
+    /** Initialize your data structure here. */
+    vector<int> rows,cols;
+    int diagonal=0,antiDiagonal=0;
+    
+    TicTacToe(int n) {
+        rows.resize(n);
+        cols.resize(n);
+    }
+    
+    /** Player {player} makes a move at ({row}, {col}).
+        @param row The row of the board.
+        @param col The column of the board.
+        @param player The player, can be either 1 or 2.
+        @return The current winning condition, can be either:
+                0: No one wins.
+                1: Player 1 wins.
+                2: Player 2 wins. */
+    int cnt=0,i;
+    int move(int row, int col, int p) {
+        int currentPlayer = (p == 1) ? 1 : -1;
+        // update currentPlayer in rows and cols arrays
+        rows[row] += currentPlayer;
+        cols[col] += currentPlayer;
+        // update diagonal
+        if (row == col) {
+            diagonal += currentPlayer;
+        }
+        // update anti diagonal
+        if (col == (cols.size() - row - 1)) {
+            antiDiagonal += currentPlayer;
+        }
+        int n = rows.size();
+        // check if the current player wins
+        if (abs(rows[row]) == n ||
+            abs(cols[col]) == n ||
+            abs(diagonal) == n ||
+            abs(antiDiagonal) == n) {
+            return p;
+        }
+        // No one wins
+        return 0;
+    }
+};
+
+/**
+ * Your TicTacToe object will be instantiated and called as such:
+ * TicTacToe* obj = new TicTacToe(n);
+ * int param_1 = obj->move(row,col,player);
+ */
