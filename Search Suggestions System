@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& A, string w) {
+        vector<vector<string>>ans;
+        string cur;
+        sort(A.begin(),A.end());
+        for(auto c:w){
+            cur+=c;
+            auto it=lower_bound(A.begin(),A.end(),cur);
+            vector<string>v;
+            for(int i=0;it!=A.end()&&i<3 ;i++,it++){
+                string s=*it;
+                if(s.find(cur)!=0)break;
+                v.push_back(s);
+            }
+            ans.push_back(v);
+        }
+        return ans;
+    }
+};
