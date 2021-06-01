@@ -1,0 +1,16 @@
+class Solution(object):
+    def maxAscendingSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        pre,s,res=nums[0],nums[0],nums[0]
+        for i in range(1,len(nums)):
+            if nums[i]<=nums[i-1]:
+                res=max(res,s)
+                s=nums[i]
+            else:
+                s+=nums[i]
+        res=max(res,s)
+        return res
+        
