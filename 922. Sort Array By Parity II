@@ -1,0 +1,21 @@
+class Solution(object):
+    def sortArrayByParityII(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        i,od,ev=0,0,0
+        for i in range(len(nums)):
+            if(i%2==0):
+                while nums[ev]%2==1:
+                    ev+=1
+                nums[i],nums[ev]=nums[ev],nums[i]
+                ev+=1
+            else:
+                while nums[od]%2==0:
+                    od+=1
+                nums[i],nums[od]=nums[od],nums[i]
+                od+=1
+            print(nums[i]),    
+        return nums        
+        
