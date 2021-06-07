@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int solve(string& s, int n)
+    {
+        int dp[n],o[n+1],e[n+1];
+        for(int i = 0; i < n; i++)dp[i] = (s[i] == '1' ? 1 : 0);
+        o[0]=0;
+        e[0]=0;
+        
+        for(int i = 0; i < n; i++)
+        {
+            if (i % 2 != 0){
+                o[i + 1] = o[i] +(dp[i] == 1 ? 1 : 0);
+                e[i + 1] = e[i] +(dp[i] == 0 ? 1 : 0);
+            }
+            else{
+                o[i + 1] = o[i] + (dp[i] == 0 ? 1 : 0);
+                e[i + 1] = e[i] +(dp[i] == 1 ? 1 : 0);
+            }
+        }
+        int ans = o[n]< e[n]?o[n]:e[n];
+
+        for(int i = 0; i < n; i++)
+        {
+            if (n % 2 != 0)
+            {
+                int x=o[n] -o[i + 1] +e[i + 1],y=e[n] -e[i + 1] +o[i + 1];
+                ans = min(ans,x);
+                ans = min(ans,y);
+            }
+        }
+
+        return ans;
+    }
+   
+    int minFlips(string s) {
+        int res=solve(s,s.size());
+        return res;
+       
+    }
+};
