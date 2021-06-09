@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maxResult(vector<int>& nums, int k) {
+        priority_queue<pair<int,int>>max_score;
+        max_score.push({nums[nums.size()-1],nums.size()-1});
+        for(int i=nums.size()-2;i>=0;i--){
+            while(!max_score.empty() && max_score.top().second>i+k)max_score.pop();
+            nums[i]+=max_score.top().first;
+            max_score.push({nums[i],i});
+        }
+        return nums[0];
+    }
+};
