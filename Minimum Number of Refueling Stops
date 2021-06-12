@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int minRefuelStops(int target, int startFuel, vector<vector<int>>& stations) {
+        stations.push_back({target,0});
+        int max_reach=startFuel,cnt=0;
+        priority_queue<int>max_fuel;
+        for(auto x:stations){
+            while(!max_fuel.empty()&&max_reach<x[0]){
+                max_reach+=max_fuel.top();
+                max_fuel.pop();
+                cnt++;
+            }
+            if(max_reach<x[0])return -1;
+            max_fuel.push(x[1]);
+        }
+        return cnt;
+    }
+};
