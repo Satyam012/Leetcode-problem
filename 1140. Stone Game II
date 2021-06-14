@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int dp[101][101];
+    int f(int i,int m,vector<int>&v){
+        if(i>=v.size())return 0;
+        if(dp[i][m]!=-1)return dp[i][m];
+        int x=INT_MIN,s=0;
+        
+        for(int j=0;j<2*m;j++){
+            if(i+j<v.size())s+=v[i+j];
+            x=max(x, s-f(j+i+1,max(m,j+1),v));
+        }
+        dp[i][m]=x;
+        return dp[i][m];
+    }
+    int stoneGameII(vector<int>& piles) {
+        memset(dp,-1,sizeof dp);
+        int diff=f(0,1,piles),sum=0;
+        for(auto x:piles)sum+=x;
+        return (sum+diff)/2;
+    }
+};
