@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int dp[501][501];
+    int solve(vector<int>&v,vector<int>&sum,int s,int e){
+        if(s>=e)return 0;
+        if(dp[s][e]!=-1)return dp[s][e];
+        
+        int left=0,right=sum[e+1]-sum[s],ans=0;
+        for(int i=s;i<e;i++){
+            left+=v[i];
+            right-=v[i];
+            if(left<right){
+                ans=max(ans,left+solve(v,sum,s,i));
+            }
+            else if(left>right){
+                ans=max(ans,right+solve(v,sum,i+1,e));
+            }
+            else{
+                ans=max(ans,left+max(solve(v,sum,s,i),solve(v,sum,i+1,e)));
+            }
+        }
+        return dp[s][e]=ans;
+    }
+    int stoneGameV(vector<int>& stoneValue) {
+        memset(dp,-1,sizeof dp);
+        vector<int>sum(stoneValue.size()+1);
+        for(int i=0;i<stoneValue.size();i++){
+            sum[i+1]=sum[i]+stoneValue[i];
+        }
+        return solve(stoneValue,sum,0,stoneValue.size()-1);
+    }
+};
