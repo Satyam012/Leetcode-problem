@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bitset<16> vis;
+    bool makesquare(vector<int>& matchsticks) {
+        long long sum=0,count=0;
+        for(auto x:matchsticks)sum+=x;
+        if(sum%4!=0)return false;
+        return dfs(0,0,sum/4,4,matchsticks);
+    }
+    bool dfs(int i,int cur,long long val,int count,vector<int>&arr){
+        if(count==1)return 1;
+        if(cur==val)return dfs(0,0,val,count-1,arr);
+        
+        if(i>=arr.size())return 0;
+        for(int k=i;k<arr.size();k++){
+            if(!vis[k]&&cur+arr[k]<=val){
+                vis[k]=true;
+                if(dfs(k+1,cur+arr[k],val,count,arr))return 1;
+                vis[k]=false;
+            }    
+        }
+        return 0;
+    }
+};
