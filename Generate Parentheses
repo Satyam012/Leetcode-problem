@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<string>v;
+    vector<string> generateParenthesis(int n) {
+        string s="";
+        test(n,0,0,s);
+        return v;
+    }
+    void test(int n,int i,int j,string s)
+    {
+        if(s.length()==2*n)
+        {
+            v.push_back(s);
+            return;
+        }
+        if(i<n)test(n,i+1,j,s+"(");
+        if(j<i)test(n,i,j+1,s+")");
+    }
+};
