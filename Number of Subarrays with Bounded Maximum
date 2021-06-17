@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int numSubarrayBoundedMax(vector<int>& nums, int L, int R) {
+        int start=0,size=0,ans=0;
+        for(int end=0;end<nums.size();end++){
+            
+            if(nums[end]>=L && nums[end]<=R){
+                size=end-start+1;
+            }
+            if(nums[end]>R){
+                size=0;
+                start=end+1;
+            }
+            ans+=size;
+        }
+        return ans;
+    }
+};
