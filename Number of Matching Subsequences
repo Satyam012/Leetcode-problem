@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numMatchingSubseq(string s, vector<string>& words) {
+        vector<int>idx[26];
+        for(int i=0;i<s.length();i++)idx[s[i]-'a'].push_back(i);
+        int cnt=0;
+        for(auto word:words){
+            int cur=-1;
+            bool found=true;
+            for(auto c:word){
+                auto it=upper_bound(begin(idx[c-'a']),end(idx[c-'a']),cur);
+                if(it==idx[c-'a'].end())found=false;
+                else cur=*it;
+            }
+            if(found)cnt++;
+        }
+        return cnt;
+    }
+};
