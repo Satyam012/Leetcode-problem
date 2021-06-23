@@ -1,0 +1,41 @@
+//Function to clone a linked list with next and random pointer.
+Node *copyList(Node *head) {
+  Node*iter = head, *next;
+
+      // First round: make copy of each node,
+      // and link them together side-by-side in a single list.
+      while (iter) {
+        next = iter->next;
+        Node*copy = new Node(iter->data);
+        iter->next = copy;
+        copy->next = next;
+        iter = next;
+      }
+
+      // Second round: assign random pointers for the copy nodes.
+      iter = head;
+      while (iter) {
+        if (iter->arb) {
+          iter->next->arb = iter->arb->next;
+        }
+        iter = iter->next->next;
+      }
+
+      // Third round: restore the original list, and extract the copy list.
+      iter = head;
+      Node*pseudoHead = new Node(0);
+      Node*copy, *copyIter = pseudoHead;
+
+      while (iter) {
+        next = iter->next->next;
+        // extract the copy
+        copy = iter->next;
+        copyIter->next = copy;
+        copyIter = copy;
+        // restore the original list
+        iter->next = next;
+        iter = next;
+      }
+
+      return pseudoHead->next;  
+}
