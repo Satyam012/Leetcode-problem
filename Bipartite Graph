@@ -1,0 +1,27 @@
+class Solution {
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    vector<int>arr(V,-1);
+	    queue<int>q;
+	    vector<bool>vis(V,false);
+	    
+	    for(int i=0;i<V;i++){
+	        if(vis[i]==true)continue;
+	        q.push(i);
+	        arr[i]=1;
+    	    while(!q.empty()){
+    	        int val=q.front();
+    	        q.pop();
+    	        if(vis[val]==true)continue;
+    	        vis[val]=true;
+    	        for(auto x:adj[val]){
+    	            if(arr[x]==arr[val])return false;
+    	            arr[x]=1-arr[val];
+    	            if(vis[x]!=true)q.push(x);
+    	        }
+    	    }
+	    }
+	    return true;
+	}
+
+};
