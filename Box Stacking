@@ -1,0 +1,36 @@
+class Solution{
+    public:
+    /*The function takes an array of heights, width and 
+    length as its 3 arguments where each index i value 
+    determines the height, width, length of the ith box. 
+    Here n is the total no of boxes.*/
+    int maxHeight(int p[],int q[],int r[],int n)
+    {
+        vector<vector<int>>A ;
+
+        for( int i = 0 ; i < n ; i++ )
+        {
+            A.push_back({p[i],q[i],r[i]});
+            A.push_back({p[i],r[i],q[i]});
+            A.push_back({q[i],p[i],r[i]});
+            A.push_back({q[i],r[i],p[i]});
+            A.push_back({r[i],p[i],q[i]});
+            A.push_back({r[i],q[i],p[i]});
+        }
+        
+        sort( A.begin() , A.end() );
+        int N = A.size();
+        int dp[N],max_h=0;
+        
+        for(int i=0;i<N;i++){
+            dp[i] = A[i][2];
+            for(int j=0;j<i;j++){
+                if(A[i][0]>A[j][0] && A[i][1]>A[j][1]){
+                    dp[i]=max(dp[i],dp[j]+A[i][2]);
+                }
+            }
+            max_h=max(max_h,dp[i]);
+        }
+        return max_h;
+    }
+};
