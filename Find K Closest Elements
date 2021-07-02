@@ -1,0 +1,15 @@
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        
+        auto right = lower_bound(arr.begin(), arr.end(), x);
+        auto left = right - 1;
+        
+        while(k--) {
+            if (right == arr.end() || (left >= arr.begin() and abs(*left - x) <= abs(*right - x))) left--;
+            else right++;
+        }
+        
+        return vector<int>(left+1, right);
+    }
+};
