@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool sumGame(string num) {
+        int sum=0;
+        for(auto c:num)if(c=='?')sum++;
+        if(sum%2)return 1;
+        
+        int i,aa=0,bb=0,sum1=0,sum2=0;
+        for(i=0;i<num.length()/2;i++){
+            if(num[i]=='?')aa++;
+            else sum1+=(num[i]-'0');
+        }    
+        for(;i<num.length();i++){
+            if(num[i]=='?')bb++;
+            else sum2+=(num[i]-'0');
+        }    
+        if(aa==bb)return sum1!=sum2;
+        
+        if(bb>aa){
+            bb-=aa;
+            if(sum2+9*(bb/2)>sum1 || sum2+9*(bb/2)<sum1)return true;
+            return false;
+        }
+        else{
+            aa-=bb;
+            if(sum1+9*(aa/2)>sum2 || sum1+9*(aa/2)<sum2)return true;
+            return false;
+        }
+    }
+};
