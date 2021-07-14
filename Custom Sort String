@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string customSortString(string order, string ss) {
+        int dp[26]={};
+        for(auto c:ss)dp[c-'a']++;
+        string str;
+        for(auto c:order){
+            while(dp[c-'a']){
+                str+=c;
+                dp[c-'a']--;
+            }
+        }
+        for(int i=0;i<26;i++){
+            while(dp[i]){
+                str+=('a'+i);
+                dp[i]--;
+            }
+        }
+        return str;
+    }
+};
