@@ -11,7 +11,7 @@ public:
         return vec;
     }
     
-    void dfs(string &s,int idx,vector<string>&v)
+    void dfs(string s,int idx,vector<string>&v)
     {
         if(idx==n)vec.push_back(v);
         else{
@@ -26,7 +26,7 @@ public:
             }
         }
     }
-    bool palindrome(int l,int h,string &s)
+    bool palindrome(int l,int h,string s)
     {
         while(l<=h)
         {
