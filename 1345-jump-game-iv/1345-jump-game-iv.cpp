@@ -5,7 +5,7 @@ public:
         queue<int>q;
         vector<bool>dp(n,false);
         unordered_map<int,vector<int>>mp;
-        unordered_set<int>st;
+        
         for(int i=0;i<arr.size();i++)mp[arr[i]].push_back(i);
         
         q.push(0);
@@ -18,22 +18,17 @@ public:
                 q.pop();
                 if(id==n-1)return ans;
                 
-                if(id>0 && dp[id-1]==false){
-                    q.push(id-1);
-                    dp[id-1]=true;
-                }
-                if(id<n-1 && dp[id+1]==false){
-                    q.push(id+1);
-                    dp[id+1]=true;
-                }
-                if(st.find(arr[id])!=st.end())continue;
-                st.insert(arr[id]);
-                for(auto &x:mp[arr[id]]){
-                    if(dp[x]==false){
+                vector<int> &index=mp[arr[id]];
+                index.push_back(id-1);
+                index.push_back(id+1);
+                
+                for(auto x:index){
+                    if(x>=0 && x<n && dp[x]==false){
                         q.push(x);
                         dp[x]=true;
                     }
                 }
+                index.clear();
             }
             ans++;
         }
