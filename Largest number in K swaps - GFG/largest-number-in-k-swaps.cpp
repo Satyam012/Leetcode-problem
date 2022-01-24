@@ -11,7 +11,7 @@ class Solution
     public:
     //Function to find the largest number after k swaps.
     void solve(int k,string str,string &smax,int id){
-        if(k==0)return;
+        if(k==0 || id>=str.length())return;
         char maxVal=str[id];
         
         for(int i=id+1;i<str.length();i++){
@@ -23,21 +23,17 @@ class Solution
         for(int j=str.length()-1;j>=id;j--){
             if(maxVal==str[j]){
                 swap(str[j],str[id]);
-                if (str.compare(smax) > 0)
-                smax = str;
+                smax=max(smax,str);
                 solve(k,str,smax,id+1);
                 swap(str[j],str[id]);
             }
         }
     }
-    
-    
-    
+
     string findMaximumNum(string str, int k)
     {
         string smax=str;
         solve(k,str,smax,0);
-        //findMaximumNum(str,k,smax,0);
         return smax;
     }
 };
