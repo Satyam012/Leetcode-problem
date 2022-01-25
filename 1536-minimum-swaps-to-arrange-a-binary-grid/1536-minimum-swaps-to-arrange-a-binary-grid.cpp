@@ -1,11 +1,5 @@
 class Solution {
 public:
-    bool valid(int id,vector<int>&v){
-        for(int j=id;j<v.size();j++){
-            if(v[j]==1)return false;
-        }
-        return true;
-    }
     int minSwaps(vector<vector<int>>& grid) {
         int ans=0,m=grid.size(),n=grid[0].size();
         vector<int>count(m);
