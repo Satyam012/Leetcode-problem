@@ -17,7 +17,7 @@ public:
                 int dist=dis(points[k],points[j]);
                 mp[dist]++;
             }
-            for(auto p:mp){
+            for(auto &p:mp){
                 int y=p.second;
                 ans+=(y*(y-1));
             }
