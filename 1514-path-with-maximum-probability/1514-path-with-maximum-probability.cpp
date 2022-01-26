@@ -14,7 +14,7 @@ public:
         while(!q.empty()){
             auto p=q.front();
             q.pop();
-            for(auto x:adj[p.first]){
+            for(auto &x:adj[p.first]){
                 if(p.second*x.second>pb[x.first]){
                     pb[x.first]=p.second*x.second;
                     q.push({x.first,pb[x.first]});
