@@ -9,10 +9,10 @@ public:
             adj[edges[i][1]].push_back({edges[i][0],p[i]});
         }
         
-        queue<pair<int,double>>q;
+        priority_queue<pair<int,double>>q;
         q.push({start,1});
         while(!q.empty()){
-            auto p=q.front();
+            auto p=q.top();
             q.pop();
             for(auto &x:adj[p.first]){
                 if(p.second*x.second>pb[x.first]){
