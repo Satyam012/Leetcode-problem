@@ -7,7 +7,7 @@ public:
         test(0,can.size(),can,s,v);
         return vec;
     }
-    void test(int i,int n,vector<int>can,int s,vector<int>v){
+    void test(int i,int n,vector<int>&can,int s,vector<int>v){
         if(s==0){
             vec.push_back(v);
             return;
