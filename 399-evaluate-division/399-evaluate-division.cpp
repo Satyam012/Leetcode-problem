@@ -1,6 +1,6 @@
 class Solution {
 public:
-    map<string,vector<string>>mp;
+    unordered_map<string,vector<string>>mp;
     map<vector<string>,double>data;
             
     double dfs(string up,string down,unordered_set<string>vis){
