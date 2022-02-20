@@ -10,9 +10,8 @@ public:
         int right = intervals[0][1];
         int res = 0;
         for (int i = 1; i < intervals.size(); i++) {
-            vector<int> v = intervals[i];
-            if (left <= v[0] && right >= v[1]) res++;
-            right=max(right,v[1]);
+            if (left <= intervals[i][0] && right >= intervals[i][1]) res++;
+            right=max(right,intervals[i][1]);
         }
         return intervals.size() - res;
             
