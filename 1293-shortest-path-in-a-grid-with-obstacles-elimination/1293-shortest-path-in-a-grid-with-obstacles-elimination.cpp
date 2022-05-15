@@ -13,24 +13,24 @@ public:
             auto v=q.front();
             q.pop();
 
-            int xCoordinate=v[0], yCoordinate=v[1];
+            int x=v[0], y=v[1];
 
-            if(xCoordinate<0 || xCoordinate>=m || yCoordinate<0 || yCoordinate>=n){
+            if(x<0 || x>=m || y<0 || y>=n){
                 continue;
             }
             
-            if(xCoordinate==m-1 && yCoordinate==n-1)return v[2];
+            if(x==m-1 && y==n-1)return v[2];
             
-            if(grid[xCoordinate][yCoordinate]==1){
+            if(grid[x][y]==1){
                 if(v[3]==0)continue;
                 v[3]--;   
             }
             
-            if(vis[xCoordinate][yCoordinate]>=v[3])continue;
-            vis[xCoordinate][yCoordinate]=v[3];
+            if(vis[x][y]>=v[3])continue;
+            vis[x][y]=v[3];
             
             for(int i=0;i<4;i++){
-                q.push({xCoordinate+dir[i][0],yCoordinate+dir[i][1],v[2]+1,v[3]});
+                q.push({x+dir[i][0],y+dir[i][1],v[2]+1,v[3]});
             }
 
         }
