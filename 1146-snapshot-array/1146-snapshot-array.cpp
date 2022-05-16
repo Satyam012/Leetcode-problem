@@ -15,7 +15,11 @@ public:
     
     int get(int index, int snap_id) {
       auto it = a[index].upper_bound(snap_id);
-      return it == begin(a[index]) ? 0 : prev(it)->second;
+      if(it==a[index].begin())return 0;
+      else{
+          it--;
+          return it->second;
+      }
     }
 };
 
