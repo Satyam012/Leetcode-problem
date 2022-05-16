@@ -1,6 +1,6 @@
 class SnapshotArray {
 public:
-    unordered_map<int, map<int, int>> a;
+    map<int, map<int, int>> a;
     int cur_snap = 0;
     
     SnapshotArray(int length) {}
