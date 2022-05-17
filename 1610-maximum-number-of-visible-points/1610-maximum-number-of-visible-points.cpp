@@ -2,7 +2,7 @@ class Solution {
 public:
     int visiblePoints(vector<vector<int>>& points, int angle, vector<int>& location) {
         int answer = 0;
-        double pi = acos(-1.0);
+        double pi = 3.14159265;
         vector<double> pointAngles;
         //iterate through all points p to find the required polar angle with respect to location
         for(auto p : points){
@@ -16,15 +16,11 @@ public:
                 //convert to degrees
                 double angle1 = angle * (180) / pi;
                 pointAngles.push_back(angle1);
+                pointAngles.push_back(angle1 + 360);
             }
         }
         sort(pointAngles.begin(),pointAngles.end());
         //sorting the angles will make sure that the required count is a contiguous length of angles
-        int n = pointAngles.size();
-        for(int i= 0; i < n ; ++i) {
-            pointAngles.push_back(pointAngles[i] + 360);
-            // push the angles again by adding 360 to handle the case of consecutive points being after a complete cycle. ex - 345 and 14 (if angle >= 29)
-        }
         int start = 0;
         int cnt = 0;
         // now a simple implementation of sliding window of size angle
